@@ -10,11 +10,22 @@ if "%1"=="clean" (
 ) 
 
 echo Compiling...
-%GCC_PREFIX%gcc -g -DGD32VF103V_EVAL -march=rv32i -O2 -ffunction-sections -I. -c -o fxrtos_gd32v_startup.o fxrtos_gd32v_startup.s
-%GCC_PREFIX%gcc -g -DUSE_STDPERIPH_DRIVER  -march=rv32im -O2 -ffunction-sections -I. -c -o main.o main.c
-%GCC_PREFIX%gcc -g -DUSE_STDPERIPH_DRIVER  -march=rv32im -O2 -ffunction-sections -I. -c -o system_gd32vf103.o system_gd32vf103.c
-%GCC_PREFIX%gcc -g -DUSE_STDPERIPH_DRIVER  -march=rv32im -O2 -ffunction-sections -I. -c -o gd32vf103_rcu.o gd32vf103_rcu.c
+
+call set OBJS=
+
+for %%f in (*.c) do (
+	echo %%f
+	%GCC_PREFIX%gcc -g -DUSE_STDPERIPH_DRIVER -DGD32VF103V_EVAL -march=rv32im -mabi=ilp32 -O2 -ffunction-sections -I. -c -o %%~nf.o %%f
+	call set OBJS=%%OBJS%% %%~nf.o
+)
+
+for %%f in (*.S) do (
+	echo %%f
+	%GCC_PREFIX%gcc -g -DGD32VF103V_EVAL -march=rv32im -mabi=ilp32 -O2 -ffunction-sections -I. -c -o %%~nf.o %%f
+	call set OBJS=%%OBJS%% %%~nf.o
+)
+
 
 echo Linking...
-%GCC_PREFIX%ld -gc-sections -nostartfiles -T fxrtos_gd32v.ld -o fxrtos_demo.elf main.o fxrtos_gd32v_startup.o system_gd32vf103.o gd32vf103_rcu.o libfxrtos.a
+%GCC_PREFIX%ld -gc-sections -nostartfiles -T GD32VF103xB.lds -o fxrtos_demo.elf %OBJS% libfxrtos.a
 %GCC_PREFIX%objcopy --target ihex fxrtos_demo.elf fxrtos_demo.hex

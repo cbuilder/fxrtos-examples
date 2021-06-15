@@ -1,12 +1,13 @@
 /*!
-    \file  gd32vf103_libopt.h
-    \brief library optional for gd32vf103
+    \file    gd32vf103_libopt.h
+    \brief   library optional for gd32vf103
 
     \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
@@ -35,8 +36,6 @@ OF SUCH DAMAGE.
 #ifndef GD32VF103_LIBOPT_H
 #define GD32VF103_LIBOPT_H
 
-
-#include "gd32vf103_rcu.h"
 /*
 #include "gd32vf103_adc.h"
 #include "gd32vf103_bkp.h"
@@ -53,12 +52,14 @@ OF SUCH DAMAGE.
 #include "gd32vf103_fwdgt.h"
 #include "gd32vf103_dbg.h"
 #include "gd32vf103_pmu.h"
-#include "gd32vf103_rcu.h"
 #include "gd32vf103_rtc.h"
 #include "gd32vf103_spi.h"
-#include "gd32vf103_timer.h"
 #include "gd32vf103_usart.h"
 #include "gd32vf103_wwdgt.h"
 #include "n200_func.h"
 */
+
+#include "gd32vf103_rcu.h"
+#include "gd32vf103_timer.h"
+
 #endif /* GD32VF103_LIBOPT_H */
