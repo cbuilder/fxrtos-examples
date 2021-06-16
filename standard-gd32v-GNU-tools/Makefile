@@ -8,9 +8,9 @@ CC=$(GCC_PREFIX)gcc
 src_c=$(wildcard *.c)
 src_S=$(wildcard *.S)
 
-ASFLAGS=-g -march=rv32im -mabi=ilp32 -I.
-CFLAGS = -ffreestanding -march=rv32im -mabi=ilp32 -O2 -I. -DUSE_STDPERIPH_DRIVER
-LDFLAGS = -nostdlib -lgcc -nostartfiles -Xlinker -melf32lriscv -Xlinker -Map=output.map -T fxrtos_gd32v.ld libfxrtos.a
+ASFLAGS=-march=rv32im -mabi=ilp32 -I.
+CFLAGS =-ffreestanding -march=rv32im -mabi=ilp32 -O2 -I. -DUSE_STDPERIPH_DRIVER -DGD32VF103V_EVAL 
+LDFLAGS =-nostdlib -lgcc -nostartfiles -Xlinker -melf32lriscv -Xlinker -Map=output.map -T fxrtos_gd32v.ld libfxrtos.a
 
 all: fxrtos_demo.elf fxrtos_demo.bin
 
